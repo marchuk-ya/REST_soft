@@ -1,0 +1,117 @@
+basePath: /api/v1/
+consumes:
+- application/json
+definitions:
+  User:
+    properties:
+      Id:
+        type: string
+      Name:
+        type: string
+    type: object
+    x-go-package: REST_soft/StructUser
+host: localhost:10000
+info:
+  description: Documentation of our awesome API.
+  title: CRUD
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      description: returns users
+      operationId: getUsers
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/UsersGetResponse'
+        "400":
+          $ref: '#/responses/badRequest'
+      tags:
+      - users
+    post:
+      operationId: createUser
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/User'
+      produces:
+      - application/json
+      responses:
+        "400":
+          $ref: '#/responses/badRequest'
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - description: Specifies uuid for a user
+        example: 3ca4ce84-ed71-42aa-8d1a-c0e001d3b8b4
+        in: path
+        name: id
+        required: true
+        type: string
+        uniqueItems: true
+        x-go-name: Id
+      produces:
+      - application/json
+      responses:
+        "400":
+          $ref: '#/responses/badRequest'
+      tags:
+      - users
+    get:
+      description: returns user by specified id
+      operationId: getUser
+      parameters:
+      - description: Specifies uuid for a user
+        example: 3ca4ce84-ed71-42aa-8d1a-c0e001d3b8b4
+        in: path
+        name: id
+        required: true
+        type: string
+        uniqueItems: true
+        x-go-name: Id
+      produces:
+      - application/json
+      responses:
+        "200":
+          $ref: '#/responses/userGetResponse'
+        "400":
+          $ref: '#/responses/badRequest'
+      tags:
+      - users
+    put:
+      operationId: updateUser
+      parameters:
+      - in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/User'
+      produces:
+      - application/json
+      responses:
+        "400":
+          $ref: '#/responses/badRequest'
+      tags:
+      - users
+produces:
+- application/json
+responses:
+  UsersGetResponse:
+    description: ""
+    schema:
+      items:
+        $ref: '#/definitions/User'
+      type: array
+  badRequest:
+    description: Error struct with error explanation string
+  userGetResponse:
+    description: ""
+    schema:
+      $ref: '#/definitions/User'
+schemes:
+- http
+swagger: "2.0"
