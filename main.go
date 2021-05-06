@@ -12,7 +12,6 @@ package main
 
 
 import (
-	. "REST_soft/StructUser"
 	"encoding/json"
 	"fmt"
 	"github.com/gocql/gocql"

@@ -1,4 +1,4 @@
-package StructUser
+package main
 
 import "github.com/gocql/gocql"
 
